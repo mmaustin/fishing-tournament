@@ -1,0 +1,2 @@
+class AnglersController < ApplicationController
+end
