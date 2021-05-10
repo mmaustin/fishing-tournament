@@ -2,17 +2,17 @@
 <p>Sign up below, Angler!</p><br>
 
 <%= form_for @angler do |f|%>
-    <%= f.label :name%>
+    <%= f.label :name%>:
     <%= f.text_field :name%><br>
-    <%= f.label :email%>
+    <%= f.label :email%>:
     <%= f.text_field :email%><br>
-    <%= f.label :password%>
+    <%= f.label :password%>:
     <%= f.password_field :password%><br>
-    <%= f.label :hometown%>
+    <%= f.label :hometown%>:
     <%= f.text_field :hometown%><br>
-    <%= f.label :age%>
+    <%= f.label :age%>:
     <%= f.number_field :age%><br>
-    <%= f.label :total_weight%>
+    <%= f.label :total_weight%>:
     <%= f.number_field :total_weight%><br>
-    <%= f.submit 'New Angler'%>
+    <%= f.submit 'Sign Up'%>
 <%end%>
