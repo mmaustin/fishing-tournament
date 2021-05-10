@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'application#home'
-  resources :sessions, only: [:new, :create, :destroy]
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+  #resources :sessions, only: [:create, :new, :destroy]
   resources :types
   resources :fish
   resources :anglers
