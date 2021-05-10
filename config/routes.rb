@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'application#home'
   resources :types
   resources :fish
   resources :anglers
