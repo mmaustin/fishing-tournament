@@ -15,5 +15,10 @@
     <%= f.label :total_weight%>:
     <%= f.number_field :total_weight%><br>
     <%= f.submit 'Sign Up'%>
+<%end%><br>
+
+<% if logged_in?%>
+    <%= current_user.name%>
+<% else%>
+    <h3>No angler is logged in</h3>
 <%end%>
-<%= current_user.name%>

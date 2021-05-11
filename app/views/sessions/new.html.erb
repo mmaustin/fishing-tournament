@@ -5,4 +5,10 @@
     <input type='submit' value='Log In'>
 </form><br>
 
-<%= current_user.name%>
+<%= session[:user_id]%>
+
+<% if logged_in?%>
+    <%= current_user.name%>
+<% else%>
+    <h3>No angler is logged in</h3>
+<%end%>
