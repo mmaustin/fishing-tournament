@@ -27,6 +27,7 @@ class FishController < ApplicationController
     end
 
     def create
+        #binding.pry
         if params[:fish][:type_id] != ""
         #binding.pry
             @fish = Fish.create(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
