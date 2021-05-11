@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'application#home'
+  get '/signup', to: 'anglers#new'
+  post '/signup', to: 'anglers#create'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
