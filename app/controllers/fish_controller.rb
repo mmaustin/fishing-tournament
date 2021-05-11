@@ -1,7 +1,20 @@
 class FishController < ApplicationController
 
+    def index
+        if params[:angler_id]
+            @fish = Angler.find_by_id(params[:angler_id]).fish
+        else
+            @fish = Fish.all
+        end
+    end
+
     def show
-        @fish = Fish.find_by_id(params[:id])
+        if params[:angler_id]
+            angler = Angler.find_by_id(params[:angler_id])
+            @fish = angler.fish.find_by_id(params[:id])
+        else
+            @fish = Fish.find_by_id(params[:id])
+        end
     end
 
     def new
@@ -31,7 +44,7 @@ class FishController < ApplicationController
     private
 
     def fish_params
-        params.require(:fish).permit(:weight, :angler_id, :type_id, type: [:name]) 
+        params.require(:fish).permit(:weight, :angler_id, :type_id, types: [:name]) 
     end
 
 end
