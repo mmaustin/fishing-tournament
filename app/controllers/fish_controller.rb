@@ -1,5 +1,9 @@
 class FishController < ApplicationController
 
+    def show
+        @fish = Fish.find_by_id(params[:id])
+    end
+
     def new
         if params[:angler_id]
             @angler = Angler.find_by_id(params[:angler_id])

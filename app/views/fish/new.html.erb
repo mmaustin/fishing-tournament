@@ -1,0 +1,15 @@
+<br>
+<%= @angler.name%><br>
+<br>
+<%= form_for @angler.fish.build do |f|%>
+    <%= f.label :weight%>
+    <%= f.text_field :weight%><br>
+    <%= f.hidden_field :angler_id%>
+    <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
+    <%= f.fields_for :type, @angler.types.build do |ff|%>
+    <%= ff.label :name, 'New Type of Fish'%>
+    <%= ff.text_field :name%><br>
+    <%end%>
+    <%= f.submit 'Catch Fish'%>
+<%end%>
+<br>
