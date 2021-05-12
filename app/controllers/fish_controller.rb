@@ -3,10 +3,9 @@ class FishController < ApplicationController
     def index
         if params[:angler_id]
             @fish = Angler.find_by_id(params[:angler_id]).fish
-            @type = Type.all
+            #binding.pry
         else
             @fish = Fish.all
-            @type = Type.all
             #binding.pry
         end
     end
@@ -56,7 +55,7 @@ class FishController < ApplicationController
 
     def destroy
         Fish.find_by_id(params[:id]).destroy
-        redirect_to angler_path(current_user.id)
+        redirect_to angler_path(current_user.id) #'/'
     end
 
     private
