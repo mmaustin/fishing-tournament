@@ -18,6 +18,21 @@ class TypesController < ApplicationController
         redirect_to types_path
     end
 
+    def edit
+        @type = Type.find_by_id(params[:id])
+    end
+
+    def update
+        @type = Type.find_by_id(params[:id])
+        @type.update(type_params)
+        redirect_to type_path(@type)
+    end
+
+    def destroy
+        Type.find_by_id(params[:id]).destroy
+        redirect_to types_path
+    end
+
     private
 
     def type_params

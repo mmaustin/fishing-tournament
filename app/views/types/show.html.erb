@@ -3,8 +3,14 @@
 <br>
 <%= form_for @fish do |f|%>
     <%= f.label :weight%>
-    <%= f.text_field :weight%>
+    <%= f.text_field :weight%><br>
     <%= f.hidden_field :type_id%>
     <%= f.hidden_field :angler_id%>
-<%= f.submit "New Fish"%> 
+<%= f.submit "New Fish"%><br><br>
+<%end%>
+
+<h3>Click below to delete this type of fish.</h3><br>
+
+<%= form_tag type_path(@type), method: 'delete' do %>
+    <%= submit_tag 'Delete Fish Type'%>
 <%end%>
