@@ -1,4 +1,8 @@
 <br>
 Fish's Weight: <%= @fish.weight%><br>
 Fish's Type: <%= @fish.type.name%><br>
-Fish's Angler ID: <%= @fish.angler.id%>
+Fish's Angler ID: <%= @fish.angler.name%><br><br>
+
+<%= form_tag fish_path(@fish), method: 'delete' do %>
+    <%= submit_tag 'Delete Fish'%>
+<%end%>

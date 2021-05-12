@@ -3,8 +3,11 @@ class FishController < ApplicationController
     def index
         if params[:angler_id]
             @fish = Angler.find_by_id(params[:angler_id]).fish
+            @type = Type.all
         else
             @fish = Fish.all
+            @type = Type.all
+            #binding.pry
         end
     end
 
@@ -20,7 +23,6 @@ class FishController < ApplicationController
     def new
         if params[:angler_id]
             @angler = Angler.find_by_id(params[:angler_id])
-            #@book = @scholar.books.build
         else
             @fish = Fish.new
         end
@@ -42,10 +44,29 @@ class FishController < ApplicationController
         end
     end
 
+    def edit
+        @fish = Fish.find_by_id(params[:id])
+    end
+
+    def update
+        @fish = Fish.find_by_id(params[:id])
+        @fish.update(fish_update_params)
+        redirect_to fish_path(@fish)
+    end
+
+    def destroy
+        Fish.find_by_id(params[:id]).destroy
+        redirect_to angler_path(current_user.id)
+    end
+
     private
 
     def fish_params
         params.require(:fish).permit(:weight, :angler_id, :type_id, types: [:name]) 
+    end
+
+    def fish_update_params
+        params.require(:fish).permit(:weight)
     end
 
 end
