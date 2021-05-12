@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  #get '/delete_profile', to: 'anglers#destroy'
 
   resources :anglers, only: [:show] do
     resources :fish, only: [:show, :index, :new]

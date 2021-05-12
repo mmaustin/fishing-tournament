@@ -1,5 +1,4 @@
 class AnglersController < ApplicationController
-    helper_method :current_user, :logged_in?
 
     def index
         @anglers = Angler.all
@@ -16,7 +15,22 @@ class AnglersController < ApplicationController
     def create
         @angler = Angler.create(angler_params)
         session[:user_id] = @angler.id
-        redirect_to '/'
+        redirect_to angler_path(@angler)
+    end
+
+    def edit
+        @angler = Angler.find_by_id(params[:id])
+    end
+
+    def update
+        @angler = Angler.find_by_id(params[:id])
+        @angler.update(angler_params)
+        redirect_to angler_path(@angler)
+    end
+
+    def destroy
+        Angler.find_by_id(params[:id]).destroy
+        redirect_to anglers_path
     end
 
     private
@@ -24,13 +38,7 @@ class AnglersController < ApplicationController
     def angler_params
         params.require(:angler).permit(:name, :email, :password, :hometown, :age, :total_weight)
     end
-=begin
-    def current_user
-        @current_user ||= Angler.find_by_id(session[:user_id])
-    end
 
-    def logged_in?
-        !!current_user
-    end
-=end
 end
+
+# <%= link_to 'Delete Profile', delete_profile_path(@angler)%>

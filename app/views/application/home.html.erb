@@ -1,6 +1,12 @@
 <br>
 <h3>home</h3>
 
-<%= link_to 'Sign Up', new_angler_path%><br>
+<%= link_to 'Sign Up', 'signup'%><br>
 <%= link_to 'Log In', '/login'%><br>
-<%= link_to 'Log Out', '/logout'%>
+<%= link_to 'Log Out', '/logout'%><br>
+
+<% if logged_in?%>
+    <%= current_user.name%>
+<% else%>
+    <h3>No angler is logged in</h3>
+<%end%>

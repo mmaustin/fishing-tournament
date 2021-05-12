@@ -6,21 +6,21 @@ class SessionsController < ApplicationController
     end
 
     def create
-#=begin
+        #binding.pry
         angler = Angler.find_by(name: params[:name])
         if angler && angler.authenticate(params[:password])
             session[:user_id] = angler.id
             #binding.pry
-            render :new
+            redirect_to angler_path(angler)
         else
-            render :new
+            redirect_to '/'
         end
-#=end
+
     end
 
     def destroy
         session.delete :user_id
-        render :new
+        redirect_to '/'
     end
 
     private
