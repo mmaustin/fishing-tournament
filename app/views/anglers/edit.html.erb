@@ -1,7 +1,19 @@
 <br>
+<%if @angler%>
 <p>Edit your personal information below</p><br>
 
 <%= form_for @angler do |f|%>
+  <div id="error_explanation">
+    <h2><%= pluralize(@angler.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @angler.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
+
     <%= f.label :username%>:
     <%= f.text_field :username%><br>
     <%= f.label :email%>:
@@ -12,10 +24,12 @@
     <%= f.text_field :hometown%><br>
     <%= f.label :age%>:
     <%= f.number_field :age%><br>
-    <%= f.label :catch_weight%>:
-    <%= f.number_field :catch_weight%><br>
     <%= f.submit 'Edit Angler'%>
 <%end%><br>
+
+<%else%>
+    <h3>This angler cranks his reel elsewhere</h3>
+<%end%>
 
 <% if logged_in?%>
     <%= current_user.username%>

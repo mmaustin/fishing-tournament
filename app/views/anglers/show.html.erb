@@ -1,8 +1,12 @@
 <br>
-<%= @angler.username%><br>
+<% if @angler%>
+    <%= @angler.username%><br>
 
-<h3>Click the link below to delete your profile.</h3><br>
+    <h3>Click the link below to delete your profile.</h3><br>
 
-<%= form_tag angler_path(@angler), method: 'delete' do %>
-    <%= submit_tag 'Delete Profile'%>
+    <%= form_tag angler_path(@angler), method: 'delete' do %>
+        <%= submit_tag 'Delete Profile'%>
+    <%end%>
+<%else%>
+    <h3>This angler cranks his reel elsewhere</h3>
 <%end%>

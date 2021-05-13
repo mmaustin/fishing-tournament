@@ -1,6 +1,10 @@
 <br>
-<%= form_for @type do |f|%>
-    <%= f.label :name%>
-    <%= f.text_field :name%><br>
-    <%= f.submit 'Edit Fish Type'%>
+<% if @type%>
+    <%= form_for @type do |f|%>
+        <%= f.label :name%>
+        <%= f.text_field :name%><br>
+        <%= f.submit 'Edit Fish Type'%>
+    <%end%>
+<% else%>
+    <h3>This type ain't got no hype!</h3>
 <%end%>
