@@ -1,7 +1,10 @@
 <br>
+<% if @fish%>
 <%= form_for @fish do |f|%>
     <%= f.label :weight%>
     <%= f.number_field :weight%><br>
     <%= f.submit 'Update Fish\'s Weight'%>
+    <%end%><br>
+<%else%>
+    <h3>This fish is with us no more</h3>
 <%end%>
-<br>
