@@ -25,25 +25,32 @@ class FishController < ApplicationController
 
     def new
         if params[:angler_id]
-            @angler = Angler.find_by_id(params[:angler_id])
+            angler = Angler.find_by_id(params[:angler_id])
+            if angler
+                @fish = angler.fish.build
+            else
+                redirect_to anglers_path
+            end
         else
-            @fish = Fish.new
+            @fish = Fish.new(angler_id: session[:user_id])
         end
     end
 
     def create
-        #binding.pry
         if params[:fish][:type_id] != ""
-        #binding.pry
-            @fish = Fish.create(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
-            #@book.add_to_book_total
-            redirect_to fish_path(@fish)
+            @fish = Fish.new(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
+            if @fish.save
+                redirect_to fish_path(@fish)
+            else
+                render :new
+            end
         else
-            @fish = Fish.create(fish_params)
-        #@book.field = params[:book][:field]
-        #@book.save
-            #@book.add_to_book_total
-            redirect_to fish_path(@fish)
+            @fish = Fish.new(fish_params)
+            if @fish.save
+                redirect_to fish_path(@fish)
+            else
+                render :new
+            end
         end
     end
 
@@ -53,8 +60,11 @@ class FishController < ApplicationController
 
     def update
         @fish = Fish.find_by_id(params[:id])
-        @fish.update(fish_update_params)
-        redirect_to fish_path(@fish)
+        if @fish.update(fish_update_params)
+            redirect_to fish_path(@fish)
+        else
+            render :edit
+        end
     end
 
     def destroy
@@ -73,3 +83,24 @@ class FishController < ApplicationController
     end
 
 end
+
+
+=begin
+    <br>
+<% if @angler%>
+<%= @angler.username%><br>
+<br>
+<%= form_for @angler.fish.build do |f|%>
+    <%= f.label :weight%>
+    <%= f.text_field :weight%><br>
+    <%= f.hidden_field :angler_id%>
+    <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
+    <%= f.fields_for :types, @angler.types.build do |ff|%>
+    <%= ff.label :name, 'New Type of Fish'%>
+    <%= ff.text_field :name%><br>
+    <%end%>
+    <%= f.submit 'Catch Fish'%>
+<%end%>
+
+<%else%>
+=end

@@ -1,15 +1,26 @@
-<br>
-<%= @angler.username%><br>
-<br>
-<%= form_for @angler.fish.build do |f|%>
+
+
+<%= form_for @fish do |f|%>
+  <div id="error_explanation">
+    <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @fish.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
     <%= f.label :weight%>
     <%= f.text_field :weight%><br>
     <%= f.hidden_field :angler_id%>
     <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
-    <%= f.fields_for :types, @angler.types.build do |ff|%>
+    <%= f.fields_for :types, @fish.angler.types.build do |ff|%>
     <%= ff.label :name, 'New Type of Fish'%>
     <%= ff.text_field :name%><br>
     <%end%>
-    <%= f.submit 'Catch Fish'%>
+<%= f.submit "New Fish"%><br><br>
 <%end%>
-<br>
+
+
+
