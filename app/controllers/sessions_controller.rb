@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     def create
         #binding.pry
-        angler = Angler.find_by(name: params[:name])
+        angler = Angler.find_by(username: params[:username])
         if angler && angler.authenticate(params[:password])
             session[:user_id] = angler.id
             #binding.pry

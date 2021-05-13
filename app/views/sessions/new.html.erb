@@ -11,7 +11,7 @@
 <%= session[:user_id]%>
 
 <% if logged_in?%>
-    <%= current_user.name%>
+    <%= current_user.username%>
 <% else%>
     <h3>No angler is logged in</h3>
 <%end%>

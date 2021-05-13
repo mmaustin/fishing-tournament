@@ -36,7 +36,7 @@ class AnglersController < ApplicationController
     private
 
     def angler_params
-        params.require(:angler).permit(:name, :email, :password, :hometown, :age, :total_weight)
+        params.require(:angler).permit(:username, :email, :password, :hometown, :age, :catch_weight)
     end
 
 end

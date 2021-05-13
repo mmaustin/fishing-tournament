@@ -2,8 +2,8 @@
 <p>Edit your personal information below</p><br>
 
 <%= form_for @angler do |f|%>
-    <%= f.label :name%>:
-    <%= f.text_field :name%><br>
+    <%= f.label :username%>:
+    <%= f.text_field :username%><br>
     <%= f.label :email%>:
     <%= f.text_field :email%><br>
     <%= f.label :password%>:
@@ -12,13 +12,13 @@
     <%= f.text_field :hometown%><br>
     <%= f.label :age%>:
     <%= f.number_field :age%><br>
-    <!-- <%= f.label :total_weight%>:
-    <%= f.number_field :total_weight%><br> -->
+    <%= f.label :catch_weight%>:
+    <%= f.number_field :catch_weight%><br>
     <%= f.submit 'Edit Angler'%>
 <%end%><br>
 
 <% if logged_in?%>
-    <%= current_user.name%>
+    <%= current_user.username%>
 <% else%>
     <h3>No angler is logged in</h3>
 <%end%>
