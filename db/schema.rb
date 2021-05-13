@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_175540) do
+ActiveRecord::Schema.define(version: 2021_05_13_125440) do
 
   create_table "anglers", force: :cascade do |t|
-    t.string "name"
     t.string "email"
     t.string "password_digest"
     t.string "hometown"
     t.integer "age"
-    t.integer "total_weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
+    t.float "catch_weight"
   end
 
   create_table "fish", force: :cascade do |t|

@@ -6,7 +6,11 @@ class TypesController < ApplicationController
 
     def show
         @type = Type.find_by_id(params[:id])
-        @fish = @type.fish.build(angler_id: session[:user_id])
+        if @type
+            @fish = @type.fish.build(angler_id: session[:user_id])
+        else
+            redirect_to types_path
+        end
     end
 
     def new

@@ -13,7 +13,11 @@ class FishController < ApplicationController
     def show
         if params[:angler_id]
             angler = Angler.find_by_id(params[:angler_id])
-            @fish = angler.fish.find_by_id(params[:id])
+            if angler
+                @fish = angler.fish.find_by_id(params[:id])
+            else
+                redirect_to anglers_path
+            end
         else
             @fish = Fish.find_by_id(params[:id])
         end
