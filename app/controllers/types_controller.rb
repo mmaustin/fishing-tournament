@@ -18,8 +18,12 @@ class TypesController < ApplicationController
     end
 
     def create
-        @type = Type.create(type_params)
-        redirect_to types_path
+        @type = Type.new(type_params)
+        if @type.save
+            redirect_to types_path
+        else
+            render :new
+        end
     end
 
     def edit
@@ -28,8 +32,11 @@ class TypesController < ApplicationController
 
     def update
         @type = Type.find_by_id(params[:id])
-        @type.update(type_params)
-        redirect_to type_path(@type)
+        if @type.update(type_params)
+            redirect_to type_path(@type)
+        else
+            render :edit
+        end
     end
 
     def destroy
