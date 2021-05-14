@@ -12,7 +12,7 @@
   </div>
 
     <%= f.label :weight%>
-    <%= f.number_field :weight%><br>
+    <%= f.number_field :weight, step: :any%><br>
     <%= f.submit 'Update Fish\'s Weight'%>
     <%end%><br>
 <%else%>

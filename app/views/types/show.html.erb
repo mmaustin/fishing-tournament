@@ -3,7 +3,7 @@
 <br>
 <%= form_for @fish do |f|%>
     <%= f.label :weight%>
-    <%= f.text_field :weight%><br>
+    <%= f.number_field :weight, step: :any%><br>
     <%= f.hidden_field :type_id%>
     <%= f.hidden_field :angler_id%>
 <%= f.submit "New Fish"%><br><br>

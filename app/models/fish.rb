@@ -1,6 +1,7 @@
 class Fish < ApplicationRecord
     belongs_to :angler 
     belongs_to :type
+    validates :weight, presence: true
     validates :weight, numericality: true
 
     def types=(type_attribute)

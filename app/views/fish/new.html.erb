@@ -12,7 +12,7 @@
   </div>
 
     <%= f.label :weight%>
-    <%= f.text_field :weight%><br>
+    <%= f.number_field :weight, step: :any%><br>
     <%= f.hidden_field :angler_id%>
     <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
     <%= f.fields_for :types, @fish.angler.types.build do |ff|%>
