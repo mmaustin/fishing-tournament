@@ -1,7 +1,7 @@
 class AnglersController < ApplicationController
 
     def index
-        @anglers = Angler.all
+        @anglers = Angler.order(catch_weight: :desc)
     end
 
     def show

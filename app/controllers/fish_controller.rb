@@ -41,14 +41,17 @@ class FishController < ApplicationController
         if params[:fish][:type_id] != ""
             @fish = Fish.new(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
             if @fish.save
-                redirect_to fish_path(@fish)
+                @fish.weight_total
+                #binding.pry
+                redirect_to anglers_path
             else
                 render :new
             end
         else
             @fish = Fish.new(fish_params)
             if @fish.save
-                redirect_to fish_path(@fish)
+                @fish.weight_total
+                redirect_to anglers_path
             else
                 render :new
             end

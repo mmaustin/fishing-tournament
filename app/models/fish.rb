@@ -11,4 +11,9 @@ class Fish < ApplicationRecord
           #self.save
     end
 
+    def weight_total
+        self.angler.catch_weight += self.weight
+        self.angler.save(validate: false)
+    end
+
 end
