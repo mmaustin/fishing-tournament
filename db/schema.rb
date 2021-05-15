@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_130014) do
+ActiveRecord::Schema.define(version: 2021_05_15_144423) do
 
   create_table "anglers", force: :cascade do |t|
     t.string "email"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_05_13_130014) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
     t.float "catch_weight"
+    t.string "uid"
+    t.string "provider"
   end
 
   create_table "fish", force: :cascade do |t|
