@@ -1,7 +1,7 @@
 <br>
 <% @fish.each do |f|%>
-    <% if f.type%>
-    <%= f.type.name%> and <%= f.angler.username%><br>
+    <% if f.type && f.angler%>
+    <%= f.type.name%> and <%= f.angler.username%> and <%= f.id%><br>
     <%end%>
 <%end%><br>
 
