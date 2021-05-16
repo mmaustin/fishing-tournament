@@ -1,19 +1,6 @@
 <br>
 <% if @type%>
-    <%= form_for @type do |f|%>
-  <div id="error_explanation">
-
-    <ul>
-      <% @type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-
-        <%= f.label :name%>
-        <%= f.text_field :name%><br>
-        <%= f.submit 'Edit Fish Type'%>
-    <%end%>
+  <%= render 'form' %>
 <% else%>
     <h3>This type ain't got no hype!</h3>
 <%end%>
