@@ -1,4 +1,4 @@
-<%= form_for @fish do |f|%>
+
   <div id="error_explanation">
     <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this article from being saved:</h2>
 
@@ -8,6 +8,3 @@
       <% end %>
     </ul>
   </div>
-
-    <%= f.label :weight%>
-    <%= f.number_field :weight, step: :any%><br>
