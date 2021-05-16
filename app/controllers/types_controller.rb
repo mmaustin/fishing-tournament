@@ -1,7 +1,11 @@
 class TypesController < ApplicationController
 
     def index
-        @types = Type.all
+        if current_user
+            @types = Type.all
+        else
+            redirect_to anglers_path
+        end
     end
 
     def show #if this throws an error, make sure an angler is logged in

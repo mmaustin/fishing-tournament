@@ -7,4 +7,6 @@ class Angler < ApplicationRecord
     validates :email, uniqueness: true
     validates :catch_weight, numericality: { equal_to: 0 }, :on => :create
 
+    
+
 end

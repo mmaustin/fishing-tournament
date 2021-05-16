@@ -5,8 +5,12 @@ class AnglersController < ApplicationController
     end
 
     def show
-        find_angler
+        if current_user != find_angler
+            redirect_to anglers_path
         #@angler = Angler.find_by_id(params[:id])
+        else
+            find_angler
+        end
     end
 
     def new

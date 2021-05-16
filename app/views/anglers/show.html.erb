@@ -1,6 +1,9 @@
 <br>
 <% if @angler%>
     <%= @angler.username%><br>
+    <% @angler.fish.each do |f|%>
+        <%= f.weight%>
+    <%end%>
 
     <h3>Click the link below to delete your profile.</h3><br>
 
