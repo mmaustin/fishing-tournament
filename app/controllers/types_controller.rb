@@ -15,6 +15,7 @@ class TypesController < ApplicationController
             if @type
                 @fish = @type.fish.build(angler_id: session[:user_id])
             else
+                flash[:alert] = "This type has yet to be caught."
                 redirect_to types_path
             end
         else
@@ -39,11 +40,11 @@ class TypesController < ApplicationController
     def edit
         if current_user
             @type = find_type_params  #Type.find_by_id(params[:id])
-            if !@type
+            if @type
+                @type
+            else
                 flash[:alert] = "Type not found!"
                 redirect_to types_path
-            else
-                @type
             end
         else
             flash[:alert] = "You are not the current user!"
