@@ -10,6 +10,7 @@ class AnglersController < ApplicationController
         if @angler
             @fish = @angler.fish.weighs_more_than(0.5)
         else
+            flash[:alert] = "Angler not found!"
             redirect_to anglers_path
         end
     end

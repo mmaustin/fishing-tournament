@@ -1,4 +1,10 @@
 <br>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %><br>
+
 <% @anglers.each do |angler|%>
     <%= angler.username%> and <%=angler.catch_weight%><br>
 <%end%>
