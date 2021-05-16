@@ -56,11 +56,11 @@ class FishController < ApplicationController
     end
 
     def edit
-        @fish = Fish.find_by_id(params[:id])
+        @fish = find_fish_params   #Fish.find_by_id(params[:id])
     end
 
     def update
-        @fish = Fish.find_by_id(params[:id])
+        @fish = find_fish_params   #Fish.find_by_id(params[:id])
         if @fish.update(fish_update_params)
             redirect_to fish_path(@fish)
         else
@@ -69,7 +69,7 @@ class FishController < ApplicationController
     end
 
     def destroy
-        Fish.find_by_id(params[:id]).destroy
+        find_fish_params.destroy   #Fish.find_by_id(params[:id]).destroy
         redirect_to angler_path(current_user.id)
     end
 
@@ -85,6 +85,10 @@ class FishController < ApplicationController
 
     def find_angler_params
         Angler.find_by_id(params[:angler_id])
+    end
+
+    def find_fish_params
+        Fish.find_by_id(params[:id])
     end
 
 end
