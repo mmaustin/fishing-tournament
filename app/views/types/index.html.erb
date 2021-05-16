@@ -1,4 +1,10 @@
 <br>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %><br>
+
 <% @types.each do |type|%>
     <%= type.name%><br>
 <%end%>

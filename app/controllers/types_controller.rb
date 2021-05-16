@@ -4,16 +4,22 @@ class TypesController < ApplicationController
         if current_user
             @types = Type.all
         else
+            flash[:alert] = "You are not logged in."
             redirect_to anglers_path
         end
     end
 
     def show #if this throws an error, make sure an angler is logged in
-        @type = find_type_params
-        if @type
-            @fish = @type.fish.build(angler_id: session[:user_id])
+        if current_user 
+            @type = find_type_params
+            if @type
+                @fish = @type.fish.build(angler_id: session[:user_id])
+            else
+                redirect_to types_path
+            end
         else
-            redirect_to types_path
+            flash[:alert] = "You are not the current user!"
+            redirect_to anglers_path
         end
     end
 
@@ -31,7 +37,18 @@ class TypesController < ApplicationController
     end
 
     def edit
-        @type = find_type_params  #Type.find_by_id(params[:id])
+        if current_user
+            @type = find_type_params  #Type.find_by_id(params[:id])
+            if !@type
+                flash[:alert] = "Type not found!"
+                redirect_to types_path
+            else
+                @type
+            end
+        else
+            flash[:alert] = "You are not the current user!"
+            redirect_to anglers_path
+        end
     end
 
     def update
