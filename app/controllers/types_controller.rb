@@ -4,8 +4,8 @@ class TypesController < ApplicationController
         @types = Type.all
     end
 
-    def show
-        @type = Type.find_by_id(params[:id])
+    def show #if this throws an error, make sure an angler is logged in
+        @type = find_type_params
         if @type
             @fish = @type.fish.build(angler_id: session[:user_id])
         else
@@ -27,11 +27,11 @@ class TypesController < ApplicationController
     end
 
     def edit
-        @type = Type.find_by_id(params[:id])
+        @type = find_type_params  #Type.find_by_id(params[:id])
     end
 
     def update
-        @type = Type.find_by_id(params[:id])
+        @type = find_type_params   #Type.find_by_id(params[:id])
         if @type.update(type_params)
             redirect_to type_path(@type)
         else
@@ -40,7 +40,7 @@ class TypesController < ApplicationController
     end
 
     def destroy
-        Type.find_by_id(params[:id]).destroy
+        find_type_params.destroy   #Type.find_by_id(params[:id]).destroy
         redirect_to types_path
     end
 
@@ -48,6 +48,10 @@ class TypesController < ApplicationController
 
     def type_params
         params.require(:type).permit(:name)
+    end
+
+    def find_type_params
+        Type.find_by_id(params[:id])
     end
 
 end
