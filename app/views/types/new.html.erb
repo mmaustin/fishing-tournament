@@ -1,16 +1,1 @@
-<br>
-<%= form_for @type do |f|%>
-  <div id="error_explanation">
-
-    <ul>
-      <% @type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-
-
-    <%= f.label :name%>
-    <%= f.text_field :name%><br>
-    <%= f.submit 'New Fish Type'%>
-<%end%>
+<%= render 'from' %>
