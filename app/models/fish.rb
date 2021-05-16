@@ -4,6 +4,8 @@ class Fish < ApplicationRecord
     validates :weight, :type_id, :angler_id, presence: true
     validates :weight, numericality: true
 
+    scope :weighs_more_than, ->(amount) { where("weight > ?", amount) }
+
     def types=(type_attribute)
         #binding.pry
           type = Type.find_or_create_by(name: type_attribute.values[0])

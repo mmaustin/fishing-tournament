@@ -5,11 +5,12 @@ class AnglersController < ApplicationController
     end
 
     def show
-        if current_user != find_angler
-            redirect_to anglers_path
         #@angler = Angler.find_by_id(params[:id])
+        find_angler   #@angler = Angler.find_by_id(params[:id])
+        if @angler
+            @fish = @angler.fish.weighs_more_than(0.5)
         else
-            find_angler
+            redirect_to anglers_path
         end
     end
 
