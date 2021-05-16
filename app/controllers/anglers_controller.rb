@@ -14,12 +14,12 @@ class AnglersController < ApplicationController
 
     def create
         @angler = Angler.new(angler_params)
-            if @angler.save
-                session[:user_id] = @angler.id
-                redirect_to angler_path(@angler)
-            else
-                render :new
-            end
+        if @angler.save
+            session[:user_id] = @angler.id
+            redirect_to angler_path(@angler)
+        else
+            render :new
+        end
     end
 
     def edit
@@ -47,5 +47,3 @@ class AnglersController < ApplicationController
     end
 
 end
-
-# <%= link_to 'Delete Profile', delete_profile_path(@angler)%>

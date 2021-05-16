@@ -3,10 +3,8 @@ class FishController < ApplicationController
     def index
         if params[:angler_id]
             @fish = Angler.find_by_id(params[:angler_id]).fish
-            #binding.pry
         else
             @fish = Fish.all
-            #binding.pry
         end
     end
 
@@ -37,12 +35,10 @@ class FishController < ApplicationController
     end
 
     def create
-        #binding.pry
         if params[:fish][:type_id] != ""
             @fish = Fish.new(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
             if @fish.save
                 @fish.weight_total
-                #binding.pry
                 redirect_to anglers_path
             else
                 render :new
@@ -73,7 +69,7 @@ class FishController < ApplicationController
 
     def destroy
         Fish.find_by_id(params[:id]).destroy
-        redirect_to angler_path(current_user.id) #'/'
+        redirect_to angler_path(current_user.id)
     end
 
     private
@@ -87,24 +83,3 @@ class FishController < ApplicationController
     end
 
 end
-
-
-=begin
-    <br>
-<% if @angler%>
-<%= @angler.username%><br>
-<br>
-<%= form_for @angler.fish.build do |f|%>
-    <%= f.label :weight%>
-    <%= f.text_field :weight%><br>
-    <%= f.hidden_field :angler_id%>
-    <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
-    <%= f.fields_for :types, @angler.types.build do |ff|%>
-    <%= ff.label :name, 'New Type of Fish'%>
-    <%= ff.text_field :name%><br>
-    <%end%>
-    <%= f.submit 'Catch Fish'%>
-<%end%>
-
-<%else%>
-=end
