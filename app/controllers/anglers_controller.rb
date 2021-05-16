@@ -5,7 +5,8 @@ class AnglersController < ApplicationController
     end
 
     def show
-        @angler = Angler.find_by_id(params[:id])
+        find_angler
+        #@angler = Angler.find_by_id(params[:id])
     end
 
     def new
@@ -23,11 +24,13 @@ class AnglersController < ApplicationController
     end
 
     def edit
-        @angler = Angler.find_by_id(params[:id])
+        find_angler
+        #@angler = Angler.find_by_id(params[:id])
     end
 
     def update
-        @angler = Angler.find_by_id(params[:id])
+        find_angler
+        #@angler = Angler.find_by_id(params[:id])
         if @angler.update(angler_params)
             redirect_to angler_path(@angler)
         else
@@ -44,6 +47,10 @@ class AnglersController < ApplicationController
 
     def angler_params
         params.require(:angler).permit(:username, :email, :password, :hometown, :age, :catch_weight)
+    end
+
+    def find_angler
+        @angler = Angler.find_by_id(params[:id])
     end
 
 end
