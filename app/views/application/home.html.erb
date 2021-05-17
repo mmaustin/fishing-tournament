@@ -13,7 +13,7 @@
 <h3>Or log in through Facebook</h3>
 <%= link_to('Log in with Facebook!', '/auth/facebook', method: :post) %><br>
 <%else%>
-        <%= link_to 'Your Page', angler_path(current_user)%>
+        <%= link_to 'Your Page', angler_path(current_user)%><br>
         <%= link_to 'Log Out', '/logout'%><br>
 <%end%>
 

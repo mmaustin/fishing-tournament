@@ -22,7 +22,11 @@ class TypesController < ApplicationController
     end
 
     def new
-        @type = Type.new
+        if current_user
+            @type = Type.new
+        else
+            current_user_flash
+        end
     end
 
     def create
