@@ -5,10 +5,14 @@
   </div>
 <% end %><br>
 
+<h3>Below you will find the fish you caught over ten pounds.</h3>
+
 <% if @angler%>
-    <%= @angler.username%><br>
+    <%= @angler.username%><br><br>
     <% @fish.each do |f|%>
-        <%= f.weight%><br>
+    <div>
+        <p><%= f.weight%>lb <%= f.type.name%></p><br>
+    </div>
     <%end%>
 
     <h3>Click the link below to delete your profile.</h3><br>

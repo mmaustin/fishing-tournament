@@ -8,7 +8,7 @@ class AnglersController < ApplicationController
         #@angler = Angler.find_by_id(params[:id])
         find_angler   #@angler = Angler.find_by_id(params[:id])
         if @angler && @angler == current_user
-            @fish = @angler.fish.weighs_more_than(10)
+            @fish = @angler.fish.weighs_more_than(10).order(weight: :desc)
         else
             angler_not_found
         end
