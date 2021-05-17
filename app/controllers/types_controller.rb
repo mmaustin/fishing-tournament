@@ -4,8 +4,7 @@ class TypesController < ApplicationController
         if current_user
             @types = Type.all
         else
-            flash[:alert] = "You are not logged in."
-            redirect_to anglers_path
+            current_user_flash
         end
     end
 
@@ -15,12 +14,10 @@ class TypesController < ApplicationController
             if @type
                 @fish = @type.fish.build(angler_id: session[:user_id])
             else
-                flash[:alert] = "This type has yet to be caught."
-                redirect_to types_path
+                type_not_found
             end
         else
-            flash[:alert] = "You are not the current user!"
-            redirect_to anglers_path
+            current_user_flash
         end
     end
 
@@ -43,12 +40,10 @@ class TypesController < ApplicationController
             if @type
                 @type
             else
-                flash[:alert] = "Type not found!"
-                redirect_to types_path
+                type_not_found
             end
         else
-            flash[:alert] = "You are not the current user!"
-            redirect_to anglers_path
+            current_user_flash
         end
     end
 
@@ -74,6 +69,16 @@ class TypesController < ApplicationController
 
     def find_type_params
         Type.find_by_id(params[:id])
+    end
+
+    def current_user_flash
+        flash[:alert] = "You are not the current user!"
+        redirect_to anglers_path
+    end
+
+    def type_not_found
+        flash[:alert] = "Type not found!"
+        redirect_to types_path
     end
 
 end
