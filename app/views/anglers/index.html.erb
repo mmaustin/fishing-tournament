@@ -5,6 +5,12 @@
   </div>
 <% end %><br>
 
+<h3>Here are your Championship Anglers in the Order of their current Standing!</h3><br>
+
 <% @anglers.each do |angler|%>
-    <%= angler.username%> and <%=angler.catch_weight%><br>
+  <% if angler == current_user%>
+    <p><%= angler.username%> has a total of <%=angler.catch_weight%> pounds of fish. <%= link_to 'Your Page', angler_path(angler)%></p><br>
+  <% else%>
+    <p><%= angler.username%> has a total of <%=angler.catch_weight%> pounds of fish.</p><br>
+  <%end%>
 <%end%>
