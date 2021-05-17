@@ -43,6 +43,7 @@ class AnglersController < ApplicationController
     end
 
     def update
+        #binding.pry
         find_angler
         #@angler = Angler.find_by_id(params[:id])
         if @angler.update(angler_params)

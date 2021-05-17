@@ -5,18 +5,19 @@
 <%= form_for @angler do |f|%>
  <%= render 'form'%>
 
-
-    <%= f.label :username%>:
-    <%= f.text_field :username%><br>
-    <%= f.label :email%>:
-    <%= f.text_field :email%><br>
-    <%= f.label :password%>:
-    <%= f.password_field :password%><br>
-    <%= f.label :hometown%>:
-    <%= f.text_field :hometown%><br>
-    <%= f.label :age%>:
-    <%= f.number_field :age, step: :any%><br>
-    <%= f.submit 'Edit Angler'%>
+  <div>
+    <p><%= f.label :username%>:
+    <%= f.text_field :username%></p><br>
+    <p><%= f.label :email%>:
+    <%= f.email_field :email%></p><br>
+    <p><%= f.label :password%>:
+    <%= f.password_field :password%></p><br>
+    <p><%= f.label :hometown%>:
+    <%= f.text_field :hometown%></p><br>
+    <p><%= f.label :age%>:
+    <%= f.number_field :age%></p><br>
+    <p><%= f.submit 'Edit Angler'%></p>
+  </div> 
 <%end%><br>
 
 <%else%>
