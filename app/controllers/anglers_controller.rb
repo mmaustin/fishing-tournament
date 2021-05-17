@@ -10,8 +10,7 @@ class AnglersController < ApplicationController
         if @angler
             @fish = @angler.fish.weighs_more_than(10)
         else
-            flash[:alert] = "Angler not found!"
-            redirect_to anglers_path
+            angler_not_found
         end
     end
 
@@ -31,8 +30,7 @@ class AnglersController < ApplicationController
 
     def edit
         if !find_angler
-            flash[:alert] = "Angler not found!"
-            redirect_to anglers_path
+            angler_not_found
         else
             find_angler
         end
@@ -62,6 +60,11 @@ class AnglersController < ApplicationController
 
     def find_angler
         @angler = Angler.find_by_id(params[:id])
+    end
+
+    def angler_not_found
+        flash[:alert] = "Angler not found!"
+        redirect_to anglers_path
     end
 
 end
