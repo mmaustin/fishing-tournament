@@ -1,37 +1,49 @@
 class FishController < ApplicationController
 
     def index
-        if params[:angler_id]
-            @fish = find_angler_params.fish#Angler.find_by_id(params[:angler_id]).fish
+        if current_user
+            if params[:angler_id]
+                @fish = find_angler_params.fish#Angler.find_by_id(params[:angler_id]).fish
+            else
+                @fish = Fish.all
+            end
         else
-            @fish = Fish.all
+            flash_alert
         end
     end
 
     def show
-        if params[:angler_id]
-            angler = find_angler_params
-            #angler = Angler.find_by_id(params[:angler_id])
-            if angler
-                @fish = angler.fish.find_by_id(params[:id])
+        if current_user
+            if params[:angler_id]
+                angler = find_angler_params
+                #angler = Angler.find_by_id(params[:angler_id])
+                if angler
+                    @fish = angler.fish.find_by_id(params[:id])
+                else
+                    redirect_to anglers_path
+                end
             else
-                redirect_to anglers_path
+                @fish = Fish.find_by_id(params[:id])
             end
         else
-            @fish = Fish.find_by_id(params[:id])
+            flash_alert
         end
     end
 
     def new
-        if params[:angler_id]
-            angler = find_angler_params#Angler.find_by_id(params[:angler_id])
-            if angler
-                @fish = angler.fish.build
+        if current_user
+            if params[:angler_id]
+                angler = find_angler_params#Angler.find_by_id(params[:angler_id])
+                if angler
+                    @fish = angler.fish.build
+                else
+                    redirect_to anglers_path
+                end
             else
-                redirect_to anglers_path
+                @fish = Fish.new(angler_id: session[:user_id])
             end
         else
-            @fish = Fish.new(angler_id: session[:user_id])
+            flash_alert
         end
     end
 
@@ -56,7 +68,17 @@ class FishController < ApplicationController
     end
 
     def edit
-        @fish = find_fish_params   #Fish.find_by_id(params[:id])
+        if current_user
+            @fish = find_fish_params   #Fish.find_by_id(params[:id])
+            if @fish.angler_id != current_user.id
+                flash[:alert] = "This is not your fish."
+                redirect_to angler_path(current_user)
+            else
+                @fish
+            end
+        else
+            flash_alert
+        end
     end
 
     def update
@@ -89,6 +111,11 @@ class FishController < ApplicationController
 
     def find_fish_params
         Fish.find_by_id(params[:id])
+    end
+
+    def flash_alert
+        flash[:alert] = "You are not logged in."
+        redirect_to root_path
     end
 
 end
