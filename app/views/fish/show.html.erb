@@ -9,6 +9,7 @@ Fish's Angler ID: <%= @fish.angler.username%><br><br>
 <%end%><br>
 
 <%else%>
-<h3>This fish is with us no more</h3>
+<h3>This fish is not in your haul. Click below to return to your page.</h3><br>
+<%= link_to 'Your information page', angler_path(current_user)%>
 <%end%>
 
