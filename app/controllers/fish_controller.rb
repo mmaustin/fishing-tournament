@@ -32,7 +32,7 @@ class FishController < ApplicationController
 
     def new
         if current_user
-            if params[:angler_id]
+            if params[:angler_id] && params[:angler_id] == current_user.id
                 angler = find_angler_params#Angler.find_by_id(params[:angler_id])
                 if angler
                     @fish = angler.fish.build

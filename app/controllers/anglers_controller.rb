@@ -29,10 +29,15 @@ class AnglersController < ApplicationController
     end
 
     def edit
-        if !find_angler
-            angler_not_found
+        if current_user
+            if !find_angler || find_angler != current_user
+                angler_not_found
+            else
+                find_angler
+            end
         else
-            find_angler
+            flash[:alert] = "You are not the current user."
+            redirect_to root_path
         end
         #@angler = Angler.find_by_id(params[:id])
     end
