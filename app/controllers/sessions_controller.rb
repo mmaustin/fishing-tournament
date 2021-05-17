@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
     helper_method :current_user, :logged_in?
 
     def new
+        if current_user
+            flash[:alert] = "You are already logged in."
+            redirect_to angler_path(current_user)
+        end
     end
 
     def create
@@ -12,7 +16,6 @@ class SessionsController < ApplicationController
         else
             redirect_to '/'
         end
-
     end
 
     def omniauth
