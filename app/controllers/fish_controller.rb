@@ -24,6 +24,12 @@ class FishController < ApplicationController
                 end
             else
                 @fish = Fish.find_by_id(params[:id])
+                if @fish.angler_id != current_user.id
+                    flash[:alert] = "That was not your fish"
+                    redirect_to angler_path(current_user)
+                else
+                    @fish
+                end
             end
         else
             flash_alert
@@ -32,11 +38,12 @@ class FishController < ApplicationController
 
     def new
         if current_user
-            if params[:angler_id] && params[:angler_id] == current_user.id
+            if params[:angler_id]
                 angler = find_angler_params#Angler.find_by_id(params[:angler_id])
-                if angler
+                if angler == current_user
                     @fish = angler.fish.build
                 else
+                    flash[:alert] = "You cannot create a new fish, if you aren't logged in."
                     redirect_to anglers_path
                 end
             else
