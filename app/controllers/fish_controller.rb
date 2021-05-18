@@ -29,7 +29,7 @@ class FishController < ApplicationController
                 end
             else
                 @fish = Fish.find_by_id(params[:id])
-                if @fish.angler_id != current_user.id
+                if !@fish || @fish.angler_id != current_user.id
                     flash[:alert] = "That was not your fish"
                     redirect_to angler_path(current_user)
                 else
@@ -82,7 +82,7 @@ class FishController < ApplicationController
     def edit
         if current_user
             @fish = find_fish_params   #Fish.find_by_id(params[:id])
-            if @fish.angler_id != current_user.id
+            if !@fish || @fish.angler_id != current_user.id
                 flash[:alert] = "This is not your fish."
                 redirect_to angler_path(current_user)
             else
