@@ -25,7 +25,11 @@ class SessionsController < ApplicationController
             u.password = SecureRandom.hex(15)
             u.catch_weight = 0
         end
-        if angler.valid?
+        if angler#.valid?
+            #binding.pry
+            session[:user_id] = angler.id
+            redirect_to anglers_path
+        elsif angler.valid?
             session[:user_id] = angler.id
             redirect_to anglers_path
         else
