@@ -1,12 +1,15 @@
 <br>
 <%= @type.name%><br>
+<p><%= current_user.username%> you may add a fish from the <%= @type.name%>'s page, if you so choose.</p><br>
 <br>
 <%= form_for @fish do |f|%>
-    <%= f.label :weight%>
-    <%= f.number_field :weight, step: :any%><br>
+<div>
+    <p><%= f.label :weight%>
+    <%= f.number_field :weight, step: :any%></p><br>
     <%= f.hidden_field :type_id%>
     <%= f.hidden_field :angler_id%>
-<%= f.submit "New Fish"%><br><br>
+<p><%= f.submit "New Fish"%></p><br><br>
+</div>
 <%end%>
 
 <h3>Click below to delete this type of fish.</h3><br>
