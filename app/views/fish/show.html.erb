@@ -1,9 +1,15 @@
 <br>
+
 <% if @fish && @fish.type%>
+
+<p>Below is the information you requested about fish <%= @fish.id%>.</p><br>
+<div>
 Fish's Weight: <%= @fish.weight%><br>
 Fish's Type: <%= @fish.type.name%><br>
-Fish's Angler ID: <%= @fish.angler.username%><br><br>
+Fish's Angler ID: <%= @fish.angler.username%><br>
+</div>
 
+<h3>If you are the authorized angler, you may delete this fish.</h3><br>
 <%= form_tag fish_path(@fish), method: 'delete' do %>
     <%= submit_tag 'Delete Fish'%>
 <%end%><br>
