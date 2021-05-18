@@ -9,12 +9,15 @@ class SessionsController < ApplicationController
     end
 
     def create
-        angler = Angler.find_by(username: params[:username])
-        if angler && angler.authenticate(params[:password])
+        angler = Angler.find_by(username: params[:session][:username])
+        #binding.pry
+        if angler && angler.authenticate(params[:session][:password])
             session[:user_id] = angler.id
             redirect_to angler_path(angler)
         else
-            redirect_to '/'
+            flash[:alert] = "Make sure you filled in the form properly."
+            render :new
+            #redirect_to '/'
         end
     end
 
