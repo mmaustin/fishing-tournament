@@ -18,8 +18,8 @@
         <%= link_to 'Sign Up', 'signup'%><br>
         <%= link_to 'Log In', '/login'%><br>
       <%else%>
-        <%= link_to 'Home', root_path%>
-        <%= link_to 'Your Page', angler_path(current_user)%>
+        <%= link_to 'Home', root_path%> ||
+        <%= link_to 'Your Page', angler_path(current_user)%> ||
         <%= link_to 'Log Out', '/logout'%><br>
       <%end%>
     </div>

@@ -15,7 +15,12 @@ class AnglersController < ApplicationController
     end
 
     def new
-        @angler = Angler.new
+        if current_user
+            flash[:alert] = "Your account already exists."
+            redirect_to angler_path(current_user)
+        else
+            @angler = Angler.new
+        end
     end
 
     def create
