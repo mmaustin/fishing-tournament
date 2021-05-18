@@ -1,10 +1,12 @@
 <br>
+
+<p><%= @fish.angler.username%>, here is the fish you requested. You may edit its weight.</p><br>
 <% if @fish%>
 <%= form_for @fish do |f|%>
   <%= render 'form'%>
 
-    <%= f.label :weight%>
-    <%= f.number_field :weight, step: :any%><br>
+    <p><%= f.label :weight%>
+    <%= f.number_field :weight, step: :any%></p><br><br>
     <%= f.submit 'Update Fish\'s Weight'%>
     <%end%><br>
 <%else%>
