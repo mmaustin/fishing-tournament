@@ -1,15 +1,18 @@
 
 <br>
+
+<p>Success, you got one! Fill out the fish's weight and type, and we'll update the standings.</p><br>
 <%= form_for @fish do |f|%>
  <%= render 'form'%>
 
-    <%= f.label :weight%>
-    <%= f.number_field :weight, step: :any%><br>
+    <p><%= f.label :weight%>
+    <%= f.number_field :weight, step: :any%></p><br>
     <%= f.hidden_field :angler_id%>
-    <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><br>
+    <p>Choose from this list: <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><p><br>
     <%= f.fields_for :types, @fish.angler.types.build do |ff|%>
-    <%= ff.label :name, 'New Type of Fish'%>
-    <%= ff.text_field :name%><br>
+    <p>Or maybe you hooked a different type of fish.</p><br>
+    <p><%= ff.label :name, 'New Type of Fish'%>
+    <%= ff.text_field :name%></p><br>
     <%end%>
 <%= f.submit "New Fish"%><br><br>
 <%end%>
