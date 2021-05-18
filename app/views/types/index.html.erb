@@ -5,6 +5,10 @@
   </div>
 <% end %><br>
 
+<p>Below you will find a list of all the types of fish caught in this tournament.</p><br>
+
 <% @types.each do |type|%>
-    <%= type.name%><br>
+<div>
+    <p><%= type.name%></p><br>
+</div>
 <%end%>
