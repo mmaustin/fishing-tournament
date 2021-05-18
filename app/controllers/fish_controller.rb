@@ -3,9 +3,14 @@ class FishController < ApplicationController
     def index
         if current_user
             if params[:angler_id]
-                @fish = find_angler_params.fish#Angler.find_by_id(params[:angler_id]).fish
+                if find_angler_params != current_user
+                    flash[:alert] = "You can't view another angler's haul."
+                    redirect_to angler_path(current_user)
+                else
+                    @fish = find_angler_params.fish.weighs_more_than(10)#Angler.find_by_id(params[:angler_id]).fish
+                end
             else
-                @fish = Fish.all
+                @fish = Fish.all.weighs_more_than(20)
             end
         else
             flash_alert
