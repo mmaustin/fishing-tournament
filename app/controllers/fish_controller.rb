@@ -7,10 +7,10 @@ class FishController < ApplicationController
                     flash[:alert] = "You can't view another angler's haul."
                     redirect_to angler_path(current_user)
                 else
-                    @fish = find_angler_params.fish.weighs_more_than(10)
+                    @fish = find_angler_params.fish.weighs_more_than(15)
                 end
             else
-                @fish = Fish.all.weighs_more_than(20)
+                @fish = Fish.all.weighs_more_than(15)
             end
         else
             flash_alert
@@ -21,7 +21,6 @@ class FishController < ApplicationController
         if current_user
             if params[:angler_id]
                 angler = find_angler_params
-                #angler = Angler.find_by_id(params[:angler_id])
                 if angler
                     @fish = angler.fish.find_by_id(params[:id])
                 else
@@ -44,7 +43,7 @@ class FishController < ApplicationController
     def new
         if current_user
             if params[:angler_id]
-                angler = find_angler_params#Angler.find_by_id(params[:angler_id])
+                angler = find_angler_params
                 if angler == current_user
                     @fish = angler.fish.build
                 else
@@ -81,7 +80,7 @@ class FishController < ApplicationController
 
     def edit
         if current_user
-            @fish = find_fish_params   #Fish.find_by_id(params[:id])
+            @fish = find_fish_params
             if !@fish || @fish.angler_id != current_user.id
                 flash[:alert] = "This is not your fish."
                 redirect_to angler_path(current_user)
@@ -94,7 +93,7 @@ class FishController < ApplicationController
     end
 
     def update
-        @fish = find_fish_params   #Fish.find_by_id(params[:id])
+        @fish = find_fish_params
         if @fish.update(fish_update_params)
             redirect_to fish_path(@fish)
         else
@@ -103,7 +102,7 @@ class FishController < ApplicationController
     end
 
     def destroy
-        find_fish_params.destroy   #Fish.find_by_id(params[:id]).destroy
+        find_fish_params.destroy
         redirect_to angler_path(current_user.id)
     end
 
