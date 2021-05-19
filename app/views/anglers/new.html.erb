@@ -3,18 +3,18 @@
 
 <%= form_for @angler do |f|%>
   <%= render 'form'%>
-  <div>
-    <p><%= f.label :username%>:
-    <%= f.text_field :username%></p><br>
-    <p><%= f.label :email%>:
-    <%= f.email_field :email%></p><br>
-    <p><%= f.label :password%>:
-    <%= f.password_field :password%></p><br>
-    <p><%= f.label :hometown%>:
-    <%= f.text_field :hometown%></p><br>
-    <p><%= f.label :age%>:
-    <%= f.number_field :age%></p><br>
-    <p><%= f.label :catch_weight%>:
+  <div class="new_form">
+    <p class="new_p"><%= f.label :username%>:
+    <%= f.text_field :username%></p>
+    <p class="new-p"><%= f.label :email%>:
+    <%= f.email_field :email%></p>
+    <p class="new_p"><%= f.label :password%>:
+    <%= f.password_field :password%></p>
+    <p class="new_p"><%= f.label :hometown%>:
+    <%= f.text_field :hometown%></p>
+    <p class="new_p"><%= f.label :age%>:
+    <%= f.number_field :age%></p>
+    <p class="new_p"><%= f.label :catch_weight%>:
     <%= f.number_field :catch_weight, step: :any%></p><br>
     <p><%= f.submit 'Sign Up'%></p>
   </div>  

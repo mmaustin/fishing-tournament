@@ -1,9 +1,9 @@
 <br>
-<p>Below are the top total catches or the top cathces of an individual angler.</p><br>
+<h3>Below are the top total catches or the top cathces of an individual angler.</h3><br>
 <% @fish.each do |f|%>
     <% if f.type && f.angler%>
 <div>
-    <p><%= f.angler.username%> caught a <%= f.type.name%>, with ID of, <%= f.id%> that weighs <%= f.weight%>lbs.</p><br>
+    <p><%= f.angler.username%> caught a <%= f.type.name%>, with ID of, <%= f.id%> that weighs <%= f.weight%>lbs.</p>
 </div>
     <%end%>
 <%end%><br>

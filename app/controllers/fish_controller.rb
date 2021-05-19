@@ -7,7 +7,7 @@ class FishController < ApplicationController
                     flash[:alert] = "You can't view another angler's haul."
                     redirect_to angler_path(current_user)
                 else
-                    @fish = find_angler_params.fish.weighs_more_than(10)#Angler.find_by_id(params[:angler_id]).fish
+                    @fish = find_angler_params.fish.weighs_more_than(10)
                 end
             else
                 @fish = Fish.all.weighs_more_than(20)
