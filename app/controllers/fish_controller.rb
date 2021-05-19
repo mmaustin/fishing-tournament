@@ -95,6 +95,7 @@ class FishController < ApplicationController
     def update
         @fish = find_fish_params
         if @fish.update(fish_update_params)
+            @fish.weight_total
             redirect_to fish_path(@fish)
         else
             render :edit
@@ -102,6 +103,8 @@ class FishController < ApplicationController
     end
 
     def destroy
+        #for database purposes, i don't want destroy any fish. i envision handling this issue
+        #by updating the fish's weight to zero.
         find_fish_params.destroy
         redirect_to angler_path(current_user.id)
     end
