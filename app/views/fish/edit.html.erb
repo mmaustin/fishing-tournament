@@ -7,8 +7,9 @@
 
     <p><%= f.label :weight%>
     <%= f.number_field :weight, step: :any%></p><br><br>
-    <%= f.label :previous_weight%>
-    <%= f.number_field :previous_weight%>
+<h2>You must enter the fish's previous weight below: <%= @fish.weight%></h2><br>    
+    <p><%= f.label :previous_weight%>
+    <%= f.number_field :previous_weight, step: :any%></p><br>
     <%= f.submit 'Update Fish\'s Weight'%>
     <%end%><br>
 <%else%>
