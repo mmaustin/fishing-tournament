@@ -95,7 +95,7 @@ class FishController < ApplicationController
     def update
         @fish = find_fish_params
         if @fish.update(fish_update_params)
-            @fish.weight_total
+            @fish.update_weight_total
             redirect_to fish_path(@fish)
         else
             render :edit
@@ -116,7 +116,7 @@ class FishController < ApplicationController
     end
 
     def fish_update_params
-        params.require(:fish).permit(:weight)
+        params.require(:fish).permit(:weight, :previous_weight)
     end
 
     def find_angler_params
