@@ -4,7 +4,7 @@
 <% if @fish%>
 <%= form_for @fish do |f|%>
   <%= render 'form'%>
-
+<h3>***Set weight to 0, to eliminate fish's weight from your total.***</h3>
     <p><%= f.label :weight%>
     <%= f.number_field :weight, step: :any%></p><br><br>
 <h2 class="edit_red">You must enter the fish's previous weight below: <%= @fish.weight%></h2><br>    

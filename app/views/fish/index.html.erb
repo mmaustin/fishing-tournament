@@ -3,7 +3,7 @@
 <% @fish.each do |f|%>
     <% if f.type && f.angler%>
 <div>
-    <p><%= f.angler.username%> caught a <%= f.type.name%>, with ID of, <%= f.id%> that weighs <%= f.weight%>lbs.</p>
+    <p><%= f.angler.username%> caught a(n) <%= f.type.name%>, with ID of <%= f.id%>, that weighs <%= f.weight%>lbs.</p>
 </div>
     <%end%>
 <%end%><br>
