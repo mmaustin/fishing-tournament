@@ -2,8 +2,9 @@ class Fish < ApplicationRecord
     attr_accessor :previous_weight
     belongs_to :angler 
     belongs_to :type
-    validates :weight, :type_id, :angler_id, :previous_weight, presence: true
+    validates :weight, :type_id, :angler_id, presence: true
     validates :weight, numericality: true
+    validates :previous_weight, presence: true, on: :update
 
     scope :weighs_more_than, ->(amount) { where("weight > ?", amount) }
 
