@@ -30,3 +30,13 @@
 .edit_red {
   color: red;
 }
+
+footer {
+  margin: 0;
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-flow: wrap;
+}
