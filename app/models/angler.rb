@@ -7,6 +7,6 @@ class Angler < ApplicationRecord
     validates :email, uniqueness: true
     validates :catch_weight, numericality: { equal_to: 0 }, :on => :create
 
-    scope :weighs_more_than, ->(amount) { where("weight > ?", amount) }
+    #scope :weighs_more_than, ->(amount) { where("weight > ?", amount) }
 
 end

@@ -60,7 +60,7 @@ class FishController < ApplicationController
 
     def create
         if params[:fish][:type_id] != ""
-            @fish = Fish.new(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
+            @fish = Fish.new(fish_params)#(weight: params[:fish][:weight], angler_id: params[:fish][:angler_id], type_id: params[:fish][:type_id])
             if @fish.save
                 @fish.weight_total
                 redirect_to anglers_path
@@ -114,7 +114,8 @@ class FishController < ApplicationController
     private
 
     def fish_params
-        params.require(:fish).permit(:weight, :angler_id, :type_id, types: [:name]) 
+        #params.require(:fish).permit(:weight, :angler_id, :type_id, types: [:name])
+        params.require(:fish).permit(:weight, :angler_id, :type_id, type_attribute: [:name])
     end
 
     def fish_update_params

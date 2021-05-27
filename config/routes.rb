@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   #get '/delete_profile', to: 'anglers#destroy'
 
-  resources :anglers do#, only: [:show] do
+  resources :anglers do
     resources :fish, only: [:show, :index, :new]
   end
 
-  #resources :sessions, only: [:create, :new, :destroy]
+
   resources :types
   resources :fish
   resources :anglers
