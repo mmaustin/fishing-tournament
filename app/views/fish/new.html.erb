@@ -9,10 +9,10 @@
     <%= f.number_field :weight, step: :any%></p><br>
     <%= f.hidden_field :angler_id%>
     <p>Choose from this list: <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "Select"%><p><br>
-    <%= f.fields_for :types, @fish.angler.types.build do |ff|%>
+    <%= f.fields_for :type, @fish.build_type do |type_fields|%>
     <p>Or maybe you hooked a different type of fish.</p><br>
-    <p><%= ff.label :name, 'New Type of Fish'%>
-    <%= ff.text_field :name%></p><br>
+    <p><%= type_fields.label :name, 'New Type of Fish'%>
+    <%= type_fields.text_field :name%></p><br>
     <%end%>
 <%= f.submit "New Fish"%><br><br>
 <%end%>

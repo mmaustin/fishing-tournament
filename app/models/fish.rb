@@ -7,16 +7,14 @@ class Fish < ApplicationRecord
     validates :previous_weight, presence: true, on: :update
 
     scope :weighs_more_than, ->(amount) { where("weight > ?", amount) }
-    accepts_nested_attributes_for :type
+    accepts_nested_attributes_for :type, reject_if: proc { |attributes| attributes['name'].blank? }
 
-=begin
-    def types=(type_attribute)
-        #binding.pry
-          type = Type.find_or_create_by(name: type_attribute.values[0])
+
+    def type_attributes=(type_attributes)
+          type = Type.find_or_create_by(name: type_attributes.values[0])
           self.type_id = type.id
-          #self.save
     end
-=end
+
 
     def weight_total
         self.angler.catch_weight += self.weight
