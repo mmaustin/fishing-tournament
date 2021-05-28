@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-    #skip_forgery_protection
-    #protect_from_forgery with: :null_session
     helper_method :current_user, :logged_in?
+
 
     def home
     end
@@ -14,5 +13,6 @@ class ApplicationController < ActionController::Base
     def logged_in?
         !!current_user
     end
+
 
 end

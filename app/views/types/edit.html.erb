@@ -1,4 +1,11 @@
 <br>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %><br>
+
 <p><%= current_user.username%>, you may edit the fish's type below.</p><br>
 
 <% if @type%>

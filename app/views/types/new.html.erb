@@ -1,2 +1,9 @@
+<br>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %><br>
+
 <p><%= current_user.username%>, you may create a new type below.</p><br>
 <%= render 'form' %>

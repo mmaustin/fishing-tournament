@@ -1,32 +1,21 @@
 class TypesController < ApplicationController
+    before_action :require_current_user, only: [:index, :show, :new, :edit]
 
     def index
-        if current_user
-            @types = Type.all
-        else
-            current_user_flash
-        end
+        @types = Type.all
     end
 
-    def show #if this throws an error, make sure an angler is logged in
-        if current_user 
-            @type = find_type_params
-            if @type
-                @fish = @type.fish.build(angler_id: session[:user_id])
-            else
-                type_not_found
-            end
+    def show
+        @type = find_type_params
+        if @type
+            @fish = @type.fish.build(angler_id: session[:user_id])
         else
-            current_user_flash
+            type_not_found
         end
     end
 
     def new
-        if current_user
-            @type = Type.new
-        else
-            current_user_flash
-        end
+        @type = Type.new
     end
 
     def create
@@ -39,20 +28,16 @@ class TypesController < ApplicationController
     end
 
     def edit
-        if current_user
-            @type = find_type_params  #Type.find_by_id(params[:id])
-            if @type
-                @type
-            else
-                type_not_found
-            end
+        @type = find_type_params
+        if @type
+            @type
         else
-            current_user_flash
+            type_not_found
         end
     end
 
     def update
-        @type = find_type_params   #Type.find_by_id(params[:id])
+        @type = find_type_params
         if @type.update(type_params)
             redirect_to type_path(@type)
         else
@@ -61,7 +46,7 @@ class TypesController < ApplicationController
     end
 
     def destroy
-        find_type_params.destroy   #Type.find_by_id(params[:id]).destroy
+        find_type_params.destroy
         redirect_to types_path
     end
 
@@ -83,6 +68,13 @@ class TypesController < ApplicationController
     def type_not_found
         flash[:alert] = "Type not found!"
         redirect_to types_path
+    end
+
+    def require_current_user
+        unless current_user
+            flash[:alert] = "You are not the current user!"
+            redirect_to anglers_path
+        end
     end
 
 end
