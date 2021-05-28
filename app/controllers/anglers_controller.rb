@@ -5,8 +5,7 @@ class AnglersController < ApplicationController
     end
 
     def show
-        #@angler = Angler.find_by_id(params[:id])
-        find_angler   #@angler = Angler.find_by_id(params[:id])
+        find_angler
         if @angler && @angler == current_user
             @fish = @angler.fish.weighs_more_than(10).order(weight: :desc)
         else
@@ -44,13 +43,10 @@ class AnglersController < ApplicationController
             flash[:alert] = "You are not the current user."
             redirect_to root_path
         end
-        #@angler = Angler.find_by_id(params[:id])
     end
 
     def update
-        #binding.pry
         find_angler
-        #@angler = Angler.find_by_id(params[:id])
         if @angler.update(angler_params)
             redirect_to angler_path(@angler)
         else

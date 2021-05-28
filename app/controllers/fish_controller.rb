@@ -1,65 +1,47 @@
 class FishController < ApplicationController
+    before_action :require_current_user, only: [:index, :show, :new, :edit]
 
     def index
-        if current_user
-            if params[:angler_id]
-                if find_angler_params != current_user
-                    flash[:alert] = "You can't view another angler's haul."
-                    redirect_to angler_path(current_user)
-                else
-                    @fish = find_angler_params.fish.weighs_more_than(15)
-                end
+        if params[:angler_id]
+            if find_angler_params != current_user
+                flash[:alert] = "You can't view another angler's haul."
+                redirect_to angler_path(current_user)
             else
-                @fish = Fish.all.weighs_more_than(15)
+                @fish = find_angler_params.fish.weighs_more_than(15)
             end
         else
-            flash_alert
+            @fish = Fish.all.weighs_more_than(15)
         end
     end
 
     def show
-        if current_user
-            if params[:angler_id]
-                angler = find_angler_params
-                if angler
-                    @fish = angler.fish.find_by_id(params[:id])
-                else
-                    redirect_to anglers_path
-                end
+        if params[:angler_id]
+            angler = find_angler_params
+            if angler
+                @fish = angler.fish.find_by_id(params[:id])
             else
-                @fish = Fish.find_by_id(params[:id])
-                if !@fish || @fish.angler_id != current_user.id
-                    flash[:alert] = "That was not your fish"
-                    redirect_to angler_path(current_user)
-                else
-                    @fish
-                end
+                redirect_to anglers_path
             end
         else
-            flash_alert
+            show_edit_fish
         end
     end
 
     def new
-        if current_user
-            if params[:angler_id]
-                angler = find_angler_params
-                if angler == current_user
-                    @fish = angler.fish.build
-                else
-                    flash[:alert] = "You cannot create a new fish, if you aren't logged in."
-                    redirect_to anglers_path
-                end
+        if params[:angler_id]
+            angler = find_angler_params
+            if angler == current_user
+                @fish = angler.fish.build
             else
-                @fish = Fish.new(angler_id: session[:user_id])
+                flash[:alert] = "You cannot create a new fish, if you aren't logged in."
+                redirect_to anglers_path
             end
         else
-            flash_alert
+                @fish = Fish.new(angler_id: session[:user_id])
         end
     end
 
     def create 
-        #binding.pry
         @fish = Fish.new(fish_params)
         if @fish.save
             @fish.weight_total
@@ -71,17 +53,7 @@ class FishController < ApplicationController
 
 
     def edit
-        if current_user
-            @fish = find_fish_params
-            if !@fish || @fish.angler_id != current_user.id
-                flash[:alert] = "This is not your fish."
-                redirect_to angler_path(current_user)
-            else
-                @fish
-            end
-        else
-            flash_alert
-        end
+        show_edit_fish
     end
 
     def update
@@ -125,6 +97,23 @@ class FishController < ApplicationController
     def flash_alert
         flash[:alert] = "You are not logged in."
         redirect_to root_path
+    end
+
+    def require_current_user
+        unless current_user
+            flash[:alert] = "You are not the current user!"
+            redirect_to anglers_path
+        end
+    end
+
+    def show_edit_fish
+        @fish = find_fish_params
+        if !@fish || @fish.angler_id != current_user.id
+            flash[:alert] = "That was not your fish."
+            redirect_to angler_path(current_user)
+        else
+            @fish
+        end
     end
 
 end
