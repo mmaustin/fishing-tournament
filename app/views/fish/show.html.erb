@@ -11,10 +11,10 @@ Fish's Angler ID: <%= @fish.angler.username%><br>
 
 <%= link_to 'Current Standings', anglers_path %><br>
 
-<!-- <h3>If you are the authorized angler, you may delete this fish.</h3><br>
+<h3>If you are the authorized angler, you may delete this fish.</h3><br>
 <%= form_tag fish_path(@fish), method: 'delete' do %>
     <%= submit_tag 'Delete Fish'%>
-<%end%><br> -->
+<%end%><br> 
 
 <%else%>
 <h3>This fish is not in your haul. Click below to return to your page.</h3><br>

@@ -37,16 +37,17 @@ class FishController < ApplicationController
                 redirect_to anglers_path
             end
         else
-                @fish = Fish.new(angler_id: session[:user_id])
+            @fish = Fish.new(angler_id: session[:user_id])
         end
     end
 
-    def create 
+    def create
         @fish = Fish.new(fish_params)
         if @fish.save
             @fish.weight_total
             redirect_to anglers_path
         else
+            #binding.pry
             render :new
         end
     end
@@ -66,14 +67,10 @@ class FishController < ApplicationController
         end
     end
 
-=begin
     def destroy
-        #for database purposes, i don't want destroy any fish. i envision handling this issue
-        #by updating the fish's weight to zero.
         find_fish_params.destroy
         redirect_to angler_path(current_user.id)
     end
-=end
 
     private
 
